@@ -35,15 +35,15 @@ export default function RootLayout({
         <div className="grid grid-cols-[64px_240px_1fr_300px] h-[calc(100vh-48px)]">
           <LeftToolbar />
           <NavigationSidebar />
-          <div>
+          <div className="flex flex-1 flex-col h-screen overflow-hidden">
             <AppHeader />
-            <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
-              <main className="flex-1 p-6 space-y-8 pb-20">{children}</main>
+            <div className="flex-1 overflow-x-hidden overflow-y-auto">
+              <main className="p-6 space-y-8 pb-20">{children}</main>
             </div>
           </div>
           <RightSidebar />
-          <AudioPlayer />
         </div>
+        <AudioPlayer />
       </body>
     </html>
   );
