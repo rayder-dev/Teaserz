@@ -38,7 +38,7 @@ export default function RootLayout({
           <div className="flex flex-1 flex-col h-screen overflow-hidden">
             <AppHeader />
             <div className="flex-1 overflow-x-hidden overflow-y-auto">
-              <main className="p-6 space-y-8 pb-20">{children}</main>
+              <main className="p-9 space-y-8 pb-12">{children}</main>
             </div>
           </div>
           <RightSidebar />

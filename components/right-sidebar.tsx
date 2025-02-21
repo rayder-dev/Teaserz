@@ -53,7 +53,7 @@ function NewMembers() {
         {members.map((member) => (
           <div
             key={member.name}
-            className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-gray-300/10 hover:bg-white/5 transition-colors"
           >
             <Avatar>
               <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-600 text-white">
@@ -98,7 +98,7 @@ function RecentActivity() {
         {activities.map((activity) => (
           <div
             key={activity.user}
-            className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors"
+            className="flex items-center gap-3 p-2 rounded-lg bg-gray-300/10 hover:bg-white/5 transition-colors"
           >
             <Avatar>
               <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-600 text-white">

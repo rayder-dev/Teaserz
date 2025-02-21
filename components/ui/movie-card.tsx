@@ -5,6 +5,7 @@ import { Play, Info } from "lucide-react";
 import { GlassCard } from "./glass-card";
 import { Button } from "./button";
 import { MoviePreviewModal } from "./movie-preview-modal";
+import Image from "next/image";
 
 interface MovieCardProps {
   title: string;
@@ -37,7 +38,9 @@ export function MovieCard({
         onClick={() => setShowPreview(true)}
       >
         {/* Thumbnail */}
-        <img
+        <Image
+          height={400}
+          width={600}
           src={thumbnail || "/placeholder.svg"}
           alt={title}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

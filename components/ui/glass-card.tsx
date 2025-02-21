@@ -39,7 +39,7 @@ export function GlassCard({
         intensityValues[intensity],
         border && "border border-white/[0.05]",
         hoverEffect && "transition-all duration-300 hover:bg-white/[0.06]",
-        "before:absolute before:inset-0",
+        "before:absolute before:inset-0 before:pointer-events-none", // Add pointer-events-none
         `before:bg-gradient-to-b ${gradient}`,
         "before:opacity-20",
         className

@@ -13,12 +13,12 @@ import Image from "next/image";
 
 const navigationItems = [
   { icon: Home, label: "Home" },
-  { icon: Music, label: "Music" },
-  { icon: Gamepad, label: "Gaming" },
-  { icon: Globe, label: "Science & Tech" },
-  { icon: BookOpen, label: "Education" },
-  { icon: Film, label: "Entertainment" },
-  { icon: Building2, label: "Student Hubs" },
+  { icon: Music, label: "Trailers" },
+  { icon: Gamepad, label: "Teasers" },
+  { icon: Globe, label: "Promotional" },
+  { icon: BookOpen, label: "Interviews" },
+  { icon: Film, label: "History" },
+  { icon: Building2, label: "Watchlist" },
 ];
 
 export function NavigationSidebar() {
@@ -32,14 +32,15 @@ export function NavigationSidebar() {
         <h1 className="text-white font-bold text-xl">Teaserz</h1>
       </div>
       <div className="p-4">
-        <nav className="space-y-1">
-          {navigationItems.map((item) => (
+        <nav className="space-y-3">
+          {navigationItems.map((item, index) => (
             <Button
               key={item.label}
               variant="ghost"
-              className="w-full justify-start gap-3 text-gray-300 hover:text-white hover:bg-white/[0.06]"
+              className={`w-full justify-start gap-3 font-medium text-gray-300 hover:text-white hover:bg-white/[0.06]
+                ${index === 0 && "bg-black/20"}`}
             >
-              <item.icon className="h-5 w-5" />
+              <item.icon className="h-10 w-10" />
               <span>{item.label}</span>
             </Button>
           ))}

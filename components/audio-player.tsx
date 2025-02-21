@@ -106,7 +106,7 @@ export function AudioPlayer() {
         <canvas
           ref={canvasRef}
           onMouseDown={handleMouseDown}
-          className="absolute inset-0 w-full h-full cursor-pointer z-10"
+          className="absolute inset-0 w-full h-full cursor-pointer"
         />
 
         {/* Volume Level Indicator */}
@@ -128,7 +128,7 @@ export function AudioPlayer() {
           <h3 className="text-sm text-gray-300 mt-1">John Doe</h3>
         </div>
 
-        <div className="flex items-center gap-2 z-10">
+        <div className="flex items-center gap-2">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
