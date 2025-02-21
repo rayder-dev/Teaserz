@@ -19,7 +19,7 @@ export function useVideoPlayer(
     if (videoRef.current) {
       videoRef.current.volume = volume / 100;
     }
-  }, [volume]);
+  }, [videoRef, volume]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -89,6 +89,11 @@ export function useVideoPlayer(
 
       setCurrentTime(formatTime(current));
       setDurationTime(formatTime(duration));
+
+      // Stop when video reaches the end
+      if (current >= duration) {
+        setIsPlaying(false);
+      }
     }
   };
 
@@ -102,6 +107,7 @@ export function useVideoPlayer(
 
   return {
     isPlaying,
+    setIsPlaying,
     isMuted,
     progress,
     currentTime,

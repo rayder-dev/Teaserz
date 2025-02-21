@@ -36,6 +36,7 @@ export function MoviePreviewModal({
   const videoRef = useRef<HTMLVideoElement>(null!);
   const {
     isPlaying,
+    setIsPlaying,
     isMuted,
     progress,
     currentTime,
@@ -67,8 +68,8 @@ export function MoviePreviewModal({
             ref={videoRef}
             src={previewUrl}
             className="w-full h-full object-cover"
-            loop
             onTimeUpdate={handleTimeUpdate}
+            onEnded={() => setIsPlaying(false)}
           />
 
           {showControls && (
