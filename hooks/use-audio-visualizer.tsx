@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useCallback, useRef, useState } from "react";
 
 export function useAudioVisualizer(
@@ -34,31 +33,34 @@ export function useAudioVisualizer(
       gradient.addColorStop(0.5, "#a855f7"); // purple-500
       gradient.addColorStop(1, "#ec4899"); // pink-500
 
-      // Draw visualization
-      const barWidth = 2;
-      const barGap = 2;
+      // Visualization settings
+      const barWidth = 3;
+      const barGap = 3;
       const barCount = Math.floor(canvas.width / (barWidth + barGap));
       const maxHeight = canvas.height * 0.7;
 
       ctx.shadowColor = "#a855f7"; // purple glow
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 20;
+      ctx.lineJoin = "round"; // Smooth edges
 
       for (let i = 0; i < barCount; i++) {
         const x = i * (barWidth + barGap);
 
-        // Create a more complex waveform
+        // Smooth waveform calculation
         const time = Date.now() * 0.002;
         const height =
-          (Math.sin(i * 0.05 + time) * 0.5 +
-            Math.sin(i * 0.025 + time * 1.2) * 0.3 +
-            Math.sin(i * 0.0125 + time * 0.8) * 0.2) *
+          (Math.sin(i * 0.08 + time) * 0.6 +
+            Math.sin(i * 0.03 + time * 1.5) * 0.3 +
+            Math.sin(i * 0.02 + time * 0.7) * 0.1) *
           maxHeight *
           amplitude;
 
         const y = (canvas.height - Math.abs(height)) / 2;
 
         ctx.fillStyle = gradient;
-        ctx.fillRect(x, y, barWidth, Math.abs(height));
+        ctx.beginPath();
+        ctx.roundRect(x, y, barWidth, Math.abs(height), 4); // Rounded bars
+        ctx.fill();
       }
 
       animationFrameId.current = requestAnimationFrame(draw);

@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useEffect, useRef, useState } from "react";
 import { Volume2, Volume1, Volume, VolumeX, Settings } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -20,6 +19,7 @@ export function AudioPlayer() {
   const [volume, setVolume] = useState(75);
   const [prevVolume, setPrevVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
+  const isDragging = useRef(false);
   const { startVisualization, setAmplitude } = useAudioVisualizer(
     canvasRef as React.RefObject<HTMLCanvasElement>
   );
@@ -50,13 +50,41 @@ export function AudioPlayer() {
     }
   };
 
-  const handleVisualizerClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+  const updateVolume = (clientX: number) => {
+    if (!canvasRef.current) return;
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
     const newVolume = Math.round((x / rect.width) * 100);
-    setVolume(Math.max(0, Math.min(100, newVolume)));
-    setIsMuted(false);
+    if (newVolume !== volume) {
+      setVolume(Math.max(0, Math.min(100, newVolume)));
+      setIsMuted(false);
+    }
   };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    isDragging.current = true;
+    updateVolume(e.clientX);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging.current) {
+        requestAnimationFrame(() => updateVolume(e.clientX));
+      }
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   return (
     <GlassCard
@@ -77,13 +105,13 @@ export function AudioPlayer() {
         {/* Canvas */}
         <canvas
           ref={canvasRef}
-          onClick={handleVisualizerClick}
+          onMouseDown={handleMouseDown}
           className="absolute inset-0 w-full h-full cursor-pointer z-10"
         />
 
         {/* Volume Level Indicator */}
         <div
-          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 transition-all duration-150 z-0"
+          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 transition-all duration-75 z-0"
           style={{ width: `${volume}%` }}
         />
       </div>
