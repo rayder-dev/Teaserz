@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export function RightSidebar() {
   return (
     <GlassCard
-      className="h-full border-l"
+      className="h-full border-l rounded-none"
       gradient="from-white/[0.02] to-transparent"
     >
       <div className="p-4 space-y-6">

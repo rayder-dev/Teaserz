@@ -6,10 +6,10 @@ import {
   BookOpen,
   Film,
   Building2,
-  Plus,
 } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const navigationItems = [
   { icon: Home, label: "Home" },
@@ -24,9 +24,13 @@ const navigationItems = [
 export function NavigationSidebar() {
   return (
     <GlassCard
-      className="h-full border-r"
+      className="h-full border-r rounded-none"
       gradient="from-white/[0.02] to-transparent"
     >
+      <div className="flex gap-2 items-center h-[3.2em] px-7">
+        <Image src="/logo.png" height={35} width={35} alt="Logo" />
+        <h1 className="text-white font-bold text-xl">Teaserz</h1>
+      </div>
       <div className="p-4">
         <nav className="space-y-1">
           {navigationItems.map((item) => (
@@ -40,12 +44,6 @@ export function NavigationSidebar() {
             </Button>
           ))}
         </nav>
-        <Button
-          variant="ghost"
-          className="mt-4 w-10 h-10 p-0 hover:bg-white/[0.06]"
-        >
-          <Plus className="h-5 w-5" />
-        </Button>
       </div>
     </GlassCard>
   );

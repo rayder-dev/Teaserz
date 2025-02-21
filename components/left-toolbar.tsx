@@ -30,8 +30,8 @@ export function LeftToolbar() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="bg-[#1A1625]/40 backdrop-blur-2xl border-r border-white/[0.02]">
-      <div className="flex flex-col items-center gap-4 p-4">
+    <div className="bg-[#5c4f81]/40 backdrop-blur-2xl border-r border-white/[0.02]">
+      <div className="flex flex-col items-center gap-4 p-4 pt-16">
         {toolbarItems.map((item, index) => (
           <button
             key={index}
@@ -82,7 +82,7 @@ export function LeftToolbar() {
 
             {/* Active indicator */}
             {activeIndex === index && (
-              <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-1 h-6 rounded-full bg-white" />
+              <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-1 h-6 rounded-full bg-sky-300" />
             )}
           </button>
         ))}

@@ -3,15 +3,7 @@
 import type React from "react";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  Headphones,
-  Users,
-  Volume2,
-  Volume1,
-  Volume,
-  VolumeX,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Volume2, Volume1, Volume, VolumeX, Settings } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { useAudioVisualizer } from "@/hooks/use-audio-visualizer";
 import { Button } from "@/components/ui/button";
@@ -21,13 +13,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { GlowingAvatar } from "./ui/glowing-avatar";
 
 export function AudioPlayer() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [volume, setVolume] = useState(75);
   const [prevVolume, setPrevVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
-  const [isAudioMuted, setIsAudioMuted] = useState(false);
   const { startVisualization, setAmplitude } = useAudioVisualizer(
     canvasRef as React.RefObject<HTMLCanvasElement>
   );
@@ -58,10 +50,6 @@ export function AudioPlayer() {
     }
   };
 
-  const toggleAudioMute = () => {
-    setIsAudioMuted(!isAudioMuted);
-  };
-
   const handleVisualizerClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -72,7 +60,7 @@ export function AudioPlayer() {
 
   return (
     <GlassCard
-      className="fixed bottom-0 left-0 w-[304px] border-t"
+      className="fixed bottom-0 left-0 w-[304px] border-t rounded-b-none"
       gradient="from-black/40 to-black/20"
       blur="lg"
     >
@@ -102,11 +90,17 @@ export function AudioPlayer() {
 
       {/* Controls */}
       <div className="flex items-center justify-between px-4 h-12">
-        <div className="flex items-center gap-2">
-          <Avatar className="h-8 w-8 border border-white/10">
-            <AvatarImage src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_2023-06-14_212351-AMHpfMwvgsNz9HBQqzXf0FFk7G58sz.png" />
-            <AvatarFallback>SF</AvatarFallback>
-          </Avatar>
+        <div className="flex items-center text-center gap-2">
+          <GlowingAvatar
+            size="sm"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_2023-06-14_212351-AMHpfMwvgsNz9HBQqzXf0FFk7G58sz.png"
+            fallback="SF"
+            glowColor="from-purple-600 to-blue-600"
+          />
+          <h3 className="text-sm text-gray-300 mt-1">John Doe</h3>
+        </div>
+
+        <div className="flex items-center gap-2 z-10">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -122,36 +116,12 @@ export function AudioPlayer() {
               <TooltipContent>{isMuted ? "Unmute" : "Mute"}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={`${
-                    isAudioMuted
-                      ? "text-red-400 hover:text-red-300"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={toggleAudioMute}
-                >
-                  <Headphones className="h-5 w-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                {isAudioMuted ? "Unmute Audio" : "Mute Audio"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
           <Button
             variant="ghost"
             size="icon"
             className="text-gray-400 hover:text-white"
           >
-            <Users className="h-5 w-5" />
+            <Settings className="h-5 w-5" />
           </Button>
         </div>
       </div>

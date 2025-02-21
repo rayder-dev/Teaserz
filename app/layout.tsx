@@ -32,16 +32,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
-        <div>
-          <AppHeader />
-          <div className="grid grid-cols-[64px_240px_1fr_300px] h-[calc(100vh-48px)]">
-            <LeftToolbar />
-            <NavigationSidebar />
+        <div className="grid grid-cols-[64px_240px_1fr_300px] h-[calc(100vh-48px)]">
+          <LeftToolbar />
+          <NavigationSidebar />
+          <div>
+            <AppHeader />
             <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
               <main className="flex-1 p-6 space-y-8 pb-20">{children}</main>
             </div>
-            <RightSidebar />
           </div>
+          <RightSidebar />
           <AudioPlayer />
         </div>
       </body>
