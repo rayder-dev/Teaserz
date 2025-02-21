@@ -1,8 +1,8 @@
 import {
   Home,
+  SquarePlay,
   Clapperboard,
   Film,
-  SquarePlay,
   Tv,
   History,
   Heart,
