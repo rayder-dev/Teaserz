@@ -47,6 +47,8 @@ export function MoviePreviewModal({
     handleSeek,
     toggleFullscreen,
     handleTimeUpdate,
+    handleSeekStart,
+    handleSeekEnd,
   } = useVideoPlayer(videoRef, open);
 
   const [showVolume, setShowVolume] = useState(false);
@@ -93,8 +95,10 @@ export function MoviePreviewModal({
                   <Slider
                     value={[progress]}
                     max={100}
-                    step={1}
+                    step={0.1} // More precise control
                     onValueChange={(value) => handleSeek(value[0])}
+                    onPointerDown={handleSeekStart} // Prevents updates while dragging
+                    onPointerUp={handleSeekEnd} // Resumes progress tracking
                     className="w-full"
                   />
 

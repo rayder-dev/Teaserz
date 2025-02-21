@@ -13,6 +13,7 @@ export function useVideoPlayer(
   const [durationTime, setDurationTime] = useState("0:00");
   const [volume, setVolume] = useState(50);
   const [lastTime, setLastTime] = useState(0);
+  const [seeking, setSeeking] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -21,14 +22,14 @@ export function useVideoPlayer(
   }, [volume]);
 
   useEffect(() => {
-    if (open) {
-      if (videoRef.current) {
-        videoRef.current.currentTime = lastTime; // Resume from last time
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    } else {
-      if (videoRef.current) {
+    if (videoRef.current) {
+      if (open) {
+        videoRef.current.currentTime = lastTime; // Resume from lastTime
+        videoRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false));
+      } else {
         setLastTime(videoRef.current.currentTime); // Save last position
         videoRef.current.pause();
         setIsPlaying(false);
@@ -55,20 +56,30 @@ export function useVideoPlayer(
     }
   };
 
+  const handleSeekStart = () => {
+    setSeeking(true);
+  };
+
   const handleSeek = (value: number) => {
     if (videoRef.current) {
-      videoRef.current.currentTime = (videoRef.current.duration * value) / 100;
-      setLastTime(videoRef.current.currentTime); // Update last time for resuming
+      const newTime = (videoRef.current.duration * value) / 100;
+      videoRef.current.currentTime = newTime;
+      setProgress(value);
+      setLastTime(newTime);
     }
   };
 
+  const handleSeekEnd = () => {
+    setSeeking(false);
+  };
+
   const handleTimeUpdate = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !seeking) {
       const current = videoRef.current.currentTime;
       const duration = videoRef.current.duration;
 
       setProgress((current / duration) * 100);
-      setLastTime(current); // Continuously update lastTime for accurate resuming
+      setLastTime(current);
 
       const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
@@ -99,7 +110,9 @@ export function useVideoPlayer(
     setVolume,
     togglePlay,
     toggleMute,
+    handleSeekStart,
     handleSeek,
+    handleSeekEnd,
     toggleFullscreen,
     handleTimeUpdate,
   };
