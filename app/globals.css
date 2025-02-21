@@ -86,25 +86,20 @@ Scroll bar
   background-color: #6f39c7;
 }
 
-#main ::-webkit-scrollbar {
-  width: 4px;
-}
-
-#main ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: transparent;
-  border-radius: 3px;
+  border-radius: 7px;
   margin: 8px 0;
 }
 
-#main ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: transparent;
-  border-radius: 2px;
+  border-radius: 9px;
 }
 
-#main:hover ::-webkit-scrollbar-thumb {
-  background: #6f39c7;
-}
-
-#main:hover ::-webkit-scrollbar-thumb:hover {
-  background: #6f39c7;
+::-webkit-scrollbar-thumb {
+  background: rgba(68, 48, 85, 0.5); /* Semi-transparent */
+  border-radius: 10px;
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
 }
