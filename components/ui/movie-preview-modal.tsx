@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { X, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { useRef, useState } from "react";
+import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "./button";
+import { Slider } from "@/components/ui/slider";
 import { useVideoPlayer } from "@/hooks/use-video-player";
 
 interface MoviePreviewModalProps {
@@ -33,93 +34,128 @@ export function MoviePreviewModal({
   rating,
 }: MoviePreviewModalProps) {
   const videoRef = useRef<HTMLVideoElement>(null!);
-  const { isPlaying, isMuted, togglePlay, toggleMute, onTimeUpdate, progress } =
-    useVideoPlayer(videoRef);
+  const {
+    isPlaying,
+    isMuted,
+    progress,
+    currentTime,
+    durationTime,
+    volume,
+    setVolume,
+    togglePlay,
+    toggleMute,
+    handleSeek,
+    toggleFullscreen,
+    handleTimeUpdate,
+  } = useVideoPlayer(videoRef, open);
 
-  useEffect(() => {
-    if (open && videoRef.current) {
-      videoRef.current.play();
-    }
-  }, [open]);
+  const [showVolume, setShowVolume] = useState(false);
+  const [showControls, setShowControls] = useState(true);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black/90 backdrop-blur-xl">
+      <DialogContent
+        className="max-w-4xl p-0 overflow-hidden bg-black/90 backdrop-blur-xl"
+        onMouseMove={() => setShowControls(true)}
+        onMouseLeave={() => setShowControls(false)}
+        aria-describedby="movie-description"
+      >
         <div className="relative aspect-video">
           <video
             ref={videoRef}
             src={previewUrl}
             className="w-full h-full object-cover"
             loop
-            onTimeUpdate={onTimeUpdate}
+            onTimeUpdate={handleTimeUpdate}
           />
 
-          {/* Video Controls Overlay */}
-          <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/80 via-transparent to-black/40">
-            <DialogHeader className="flex flex-row items-start justify-between">
-              <div className="flex-1">
-                <DialogTitle className="text-2xl font-bold text-white">
-                  {title}
-                </DialogTitle>
-                <div className="flex gap-2 text-sm text-gray-200 mt-1">
-                  <span>{year}</span>
-                  <span>•</span>
-                  <span>{duration}</span>
-                  <span>•</span>
-                  <span>{rating}</span>
+          {showControls && (
+            <div className="absolute inset-0 flex flex-col justify-between p-4 bg-gradient-to-t from-black/80 via-transparent to-black/40">
+              <DialogHeader className="flex flex-row items-start justify-between">
+                <div className="flex-1">
+                  <DialogTitle className="text-2xl font-bold text-white">
+                    {title}
+                  </DialogTitle>
+                  <div className="flex gap-2 text-sm text-gray-200 mt-1">
+                    <span>{year}</span>
+                    <span>•</span>
+                    <span>{duration}</span>
+                    <span>•</span>
+                    <span>{rating}</span>
+                  </div>
                 </div>
-              </div>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="text-white hover:bg-white/20"
-                onClick={() => onOpenChange(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </DialogHeader>
-
-            {/* Bottom Controls */}
-            <div className="space-y-4">
-              <p className="text-gray-200">{description}</p>
-
-              <div className="flex items-center gap-4">
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="text-white hover:bg-white/20"
-                  onClick={togglePlay}
-                >
-                  {isPlaying ? (
-                    <Pause className="h-6 w-6" />
-                  ) : (
-                    <Play className="h-6 w-6" fill="white" />
-                  )}
-                </Button>
-
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="text-white hover:bg-white/20"
-                  onClick={toggleMute}
-                >
-                  {isMuted ? (
-                    <VolumeX className="h-6 w-6" />
-                  ) : (
-                    <Volume2 className="h-6 w-6" />
-                  )}
-                </Button>
-
-                {/* Progress Bar */}
-                <div className="relative flex-1 h-1 bg-white/20 rounded-full overflow-hidden">
-                  <div
-                    className="absolute inset-y-0 left-0 bg-white transition-all duration-150"
-                    style={{ width: `${progress}%` }}
+              </DialogHeader>
+              <div className="space-y-4 absolute bottom-0 left-0 w-full">
+                <p id="movie-description" className="text-gray-200 px-4">
+                  {description}
+                </p>
+                <div className="bg-violet-500/5 backdrop-blur-lg p-2 pt-0">
+                  <Slider
+                    value={[progress]}
+                    max={100}
+                    step={1}
+                    onValueChange={(value) => handleSeek(value[0])}
+                    className="w-full"
                   />
+
+                  <div className="flex items-center gap-4 mt-2">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="text-white hover:bg-white/20"
+                      onClick={togglePlay}
+                    >
+                      {isPlaying ? (
+                        <Pause className="h-6 w-6" />
+                      ) : (
+                        <Play className="h-6 w-6" fill="white" />
+                      )}
+                    </Button>
+
+                    <div
+                      className="relative flex"
+                      onMouseEnter={() => setShowVolume(true)}
+                      onMouseLeave={() => setShowVolume(false)}
+                    >
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="text-white hover:bg-white/20"
+                        onClick={toggleMute}
+                      >
+                        {isMuted ? (
+                          <VolumeX className="h-6 w-6" />
+                        ) : (
+                          <Volume2 className="h-6 w-6" />
+                        )}
+                      </Button>
+                      {showVolume && (
+                        <Slider
+                          value={[volume]}
+                          max={100}
+                          step={1}
+                          onValueChange={(value) => setVolume(value[0])}
+                          className="w-24 ml-2"
+                        />
+                      )}
+                    </div>
+
+                    <span className="ml-auto text-white text-sm">
+                      {currentTime} / {durationTime}
+                    </span>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="text-white hover:bg-white/20"
+                      onClick={toggleFullscreen}
+                    >
+                      <Maximize className="h-6 w-6" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

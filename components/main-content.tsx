@@ -55,7 +55,7 @@ const latest = [
       "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
     thumbnail: "/thumbnail/thebatman.jpg?height=400&width=600",
     previewUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     duration: "2h 55m",
     year: "2022",
     rating: "PG-13",
@@ -67,7 +67,7 @@ const latest = [
       "A soldier fighting aliens gets to relive the same day over and over again, the day restarting every time he dies.",
     thumbnail: "/thumbnail/edgeoftomorrow.jpg?height=400&width=600",
     previewUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     duration: "1h 53m",
     year: "2014",
     rating: "PG-13",

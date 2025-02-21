@@ -28,7 +28,13 @@ export function NavigationSidebar() {
       gradient="from-white/[0.02] to-transparent"
     >
       <div className="flex gap-2 items-center h-[3.2em] px-7">
-        <Image src="/logo.png" height={35} width={35} alt="Logo" />
+        <Image
+          src="/logo.png"
+          height={35}
+          width={35}
+          alt="Logo"
+          className="w-auto"
+        />
         <h1 className="text-white font-bold text-xl">Teaserz</h1>
       </div>
       <div className="p-4">
