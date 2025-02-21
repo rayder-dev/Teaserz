@@ -11,18 +11,18 @@ const toolbarItems = [
   },
   {
     icon: "🎮",
+    gradient: "from-pink-400 to-fuchsia-600",
+    activeGradient: "from-pink-500 to-fuchsia-700",
+  },
+  {
+    icon: "🎵",
     gradient: "from-sky-400 to-cyan-600",
     activeGradient: "from-sky-500 to-cyan-700",
   },
   {
-    icon: "🎵",
+    icon: "Live",
     gradient: "from-green-400 to-emerald-600",
     activeGradient: "from-green-500 to-emerald-700",
-  },
-  {
-    icon: "Live",
-    gradient: "from-pink-400 to-fuchsia-600",
-    activeGradient: "from-pink-500 to-fuchsia-700",
   },
 ];
 
@@ -72,7 +72,7 @@ export function LeftToolbar() {
               )}
             >
               <span
-                className={`relative  text-white ${
+                className={`relative  text-emerald-400 font-bold ${
                   item.icon === "Live" ? "text-sm" : " text-xl"
                 }`}
               >

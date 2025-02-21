@@ -4,7 +4,7 @@ import type React from "react";
 
 import { cn } from "@/lib/utils";
 
-interface HexagonAvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlowingAvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   fallback?: string;
   size?: "sm" | "md" | "lg";
@@ -17,14 +17,14 @@ const sizes = {
   lg: "w-24 h-24",
 };
 
-export function HexagonAvatar({
+export function GlowingAvatar({
   src,
   fallback,
   size = "md",
   glowColor = "from-purple-600 to-blue-600",
   className,
   ...props
-}: HexagonAvatarProps) {
+}: GlowingAvatarProps) {
   return (
     <div className="relative group">
       {/* Glow effect */}
@@ -36,10 +36,10 @@ export function HexagonAvatar({
         )}
       />
 
-      {/* Hexagon container */}
+      {/* Rounded container */}
       <div
         className={cn(
-          "relative",
+          "relative rounded-full overflow-hidden",
           sizes[size],
           "before:content-[''] before:absolute before:inset-0",
           "before:bg-gradient-to-r before:from-white/20 before:to-white/5",
@@ -47,21 +47,9 @@ export function HexagonAvatar({
           `after:bg-gradient-to-r after:${glowColor} after:opacity-10`,
           className
         )}
-        style={{
-          clipPath:
-            "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-          borderRadius: "24%",
-        }}
         {...props}
       >
-        <div
-          className="absolute inset-[1px] overflow-hidden"
-          style={{
-            borderRadius: "24%",
-            clipPath:
-              "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-          }}
-        >
+        <div className="absolute inset-[1px] overflow-hidden rounded-full">
           {src ? (
             <img
               src={src || "/placeholder.svg"}

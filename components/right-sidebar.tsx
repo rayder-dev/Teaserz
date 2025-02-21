@@ -1,6 +1,6 @@
 import { AvatarFallback } from "@/components/ui/avatar";
 import { Avatar } from "@/components/ui/avatar";
-import { HexagonAvatar } from "@/components/ui/hexagon-avatar";
+import { GlowingAvatar } from "@/components/ui/glowing-avatar";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
 
@@ -22,14 +22,14 @@ export function RightSidebar() {
 function UserProfile() {
   return (
     <div className="flex flex-col items-center text-center">
-      <HexagonAvatar
+      <GlowingAvatar
         size="lg"
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_2023-06-14_212351-AMHpfMwvgsNz9HBQqzXf0FFk7G58sz.png"
         fallback="SF"
         glowColor="from-purple-600 to-blue-600"
       />
-      <h3 className="text-xl font-bold text-white mt-4">Sophie Fortune</h3>
-      <p className="text-gray-400">@sophiefortune</p>
+      <h3 className="text-xl font-bold text-white mt-4">John Doe</h3>
+      <p className="text-gray-400">@john@doe.com</p>
     </div>
   );
 }
