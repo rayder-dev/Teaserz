@@ -1,4 +1,4 @@
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search, SlidersHorizontal, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { FullScreenToggle } from "./fullscreen-toggle";
 import {
@@ -12,21 +12,26 @@ import { Button } from "./ui/button";
 export function AppHeader() {
   return (
     <div className="flex items-center gap-2 p-2 bg-[#2d2d44]">
-      {/* <WindowControls /> */}
+      <Create />
       <SearchBar />
       <HeaderActions />
     </div>
   );
 }
 
-// function WindowControls() {
-//   return (
-//     <div className="flex gap-2 items-center">
-//       <Image src="/logo.png" height={35} width={35} alt="Logo" />
-//       <h1 className="text-white font-bold text-xl">Teaserz</h1>
-//     </div>
-//   );
-// }
+function Create() {
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant="ghost"
+        className="text-gray-400 hover:text-white font-semibold bg-[#26253c]"
+      >
+        <Plus />
+        <h3>Create</h3>
+      </Button>
+    </div>
+  );
+}
 
 function SearchBar() {
   return (
