@@ -57,7 +57,7 @@ Scroll bar
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #6f39c7;
+  background-color: #4a3b6b;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,7 +72,7 @@ Scroll bar
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(68, 48, 85, 0.5); /* Semi-transparent */
+  background: rgba(56 51 89); /* Semi-transparent */
   border-radius: 10px;
   backdrop-filter: blur(10px); /* Frosted glass effect */
   -webkit-backdrop-filter: blur(10px); /* Safari support */
