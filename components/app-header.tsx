@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 
 export function AppHeader() {
   return (
-    <div className="flex items-center gap-2 p-2 bg-[#2d2d44]">
+    <div className="flex items-center gap-2 p-2 px-8 bg-[#2d2d44]">
       <Create />
       <SearchBar />
       <HeaderActions />
