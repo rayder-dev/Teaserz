@@ -1,11 +1,11 @@
 import {
   Home,
-  Music,
-  Gamepad,
-  Globe,
-  BookOpen,
+  Clapperboard,
   Film,
-  Building2,
+  SquarePlay,
+  Tv,
+  History,
+  Heart,
 } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,12 @@ import Image from "next/image";
 
 const navigationItems = [
   { icon: Home, label: "Home" },
-  { icon: Music, label: "Trailers" },
-  { icon: Gamepad, label: "Teasers" },
-  { icon: Globe, label: "Promotional" },
-  { icon: BookOpen, label: "Interviews" },
-  { icon: Film, label: "History" },
-  { icon: Building2, label: "Watchlist" },
+  { icon: SquarePlay, label: "Trailers" },
+  { icon: Clapperboard, label: "Teasers" },
+  { icon: Film, label: "Promotional" },
+  { icon: Tv, label: "Interviews" },
+  { icon: History, label: "History" },
+  { icon: Heart, label: "Watchlist" },
 ];
 
 export function NavigationSidebar() {
