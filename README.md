@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎬 Teaserz - Your Gateway to the Latest Movie Trailers
+
+Welcome to Teaserz, the ultimate platform for showcasing and promoting movie trailers! Our app is designed to connect movie studios with audiences, providing an engaging and seamless experience for watching and discovering the latest movies.
+
+🌟 Features
+Curated Trailers: Access a curated collection of the latest movie trailers from various genres.
+
+User-Friendly Interface: Enjoy a sleek, intuitive, and responsive design for an optimal viewing experience.
+
+Search & Filter: Easily search for and filter trailers based on genres, release dates, and more.
+
+Studio Promotion: Movie studios can showcase their trailers and promote upcoming releases.
+
+Community Engagement: Engage with other movie enthusiasts through comments, likes, and shares.
 
 ## Getting Started
 
