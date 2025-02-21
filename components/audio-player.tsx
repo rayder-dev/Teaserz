@@ -121,11 +121,11 @@ export function AudioPlayer() {
         <div className="flex items-center text-center gap-2">
           <GlowingAvatar
             size="sm"
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_2023-06-14_212351-AMHpfMwvgsNz9HBQqzXf0FFk7G58sz.png"
+            src="/avatars/09.webp"
             fallback="SF"
             glowColor="from-purple-600 to-blue-600"
           />
-          <h3 className="text-sm text-gray-300 mt-1">John Doe</h3>
+          <h3 className="text-sm text-gray-300 mt-1">Ray Dev</h3>
         </div>
 
         <div className="flex items-center gap-2">

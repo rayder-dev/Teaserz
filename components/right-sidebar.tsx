@@ -1,4 +1,4 @@
-import { AvatarFallback } from "@/components/ui/avatar";
+import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Avatar } from "@/components/ui/avatar";
 import { GlowingAvatar } from "@/components/ui/glowing-avatar";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -24,21 +24,25 @@ function UserProfile() {
     <div className="flex flex-col items-center text-center">
       <GlowingAvatar
         size="lg"
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot_2023-06-14_212351-AMHpfMwvgsNz9HBQqzXf0FFk7G58sz.png"
+        src="/avatars/09.webp"
         fallback="SF"
         glowColor="from-purple-600 to-blue-600"
       />
-      <h3 className="text-xl font-bold text-white mt-4">John Doe</h3>
-      <p className="text-gray-400">@john@doe.com</p>
+      <h3 className="text-xl font-bold text-white mt-4">Ray Dev</h3>
+      <p className="text-gray-400">@rayder-dev</p>
     </div>
   );
 }
 
 function NewMembers() {
   const members = [
-    { name: "Anne Couture", time: "3 min ago" },
-    { name: "Miriam Soleil", time: "20 min ago" },
-    { name: "Marie Laval", time: "35 min ago" },
+    { name: "Anne Couture", avatarSrc: "/avatars/01.webp", time: "3 min ago" },
+    {
+      name: "Miriam Soleil",
+      avatarSrc: "/avatars/02.webp",
+      time: "20 min ago",
+    },
+    { name: "Marie Laval", avatarSrc: "/avatars/03.webp", time: "35 min ago" },
   ];
 
   return (
@@ -55,7 +59,12 @@ function NewMembers() {
             key={member.name}
             className="flex items-center gap-3 p-2 rounded-lg bg-gray-300/10 hover:bg-white/5 transition-colors"
           >
-            <Avatar>
+            <Avatar className="bg-sky-600">
+              <AvatarImage
+                src={member.avatarSrc}
+                alt={member.name}
+                loading="lazy"
+              />
               <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-600 text-white">
                 {member.name[0]}
               </AvatarFallback>
@@ -75,12 +84,19 @@ function RecentActivity() {
   const activities = [
     {
       user: "Hola Spine",
+      avatarSrc: "/avatars/04.webp",
       action: "invited you to a channel",
       time: "2 min ago",
     },
-    { user: "Eva Solain", action: "invited you to a chat", time: "20 min ago" },
+    {
+      user: "Eva Solain",
+      avatarSrc: "/avatars/05.webp",
+      action: "invited you to a chat",
+      time: "20 min ago",
+    },
     {
       user: "Pierre Ford",
+      avatarSrc: "/avatars/06.webp",
       action: "started following you",
       time: "35 min ago",
     },
@@ -100,7 +116,12 @@ function RecentActivity() {
             key={activity.user}
             className="flex items-center gap-3 p-2 rounded-lg bg-gray-300/10 hover:bg-white/5 transition-colors"
           >
-            <Avatar>
+            <Avatar className="bg-violet-600">
+              <AvatarImage
+                src={activity.avatarSrc}
+                alt={activity.user[0]}
+                loading="lazy"
+              />
               <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-600 text-white">
                 {activity.user[0]}
               </AvatarFallback>
