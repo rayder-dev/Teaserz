@@ -88,7 +88,7 @@ export function AudioPlayer() {
 
   return (
     <GlassCard
-      className="fixed bottom-0 left-0 w-[304px] border-t rounded-b-none"
+      className="fixed flex flex-row-reverse w-full lg:flex-col lg:w-[304px] bottom-0 left-0  border-t rounded-b-none"
       gradient="from-black/40 to-black/20"
       blur="lg"
     >
@@ -117,7 +117,7 @@ export function AudioPlayer() {
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-between px-4 h-12">
+      <div className="flex items-center justify-between px-4 h-12 space-x-2">
         <div className="flex items-center text-center gap-2">
           <GlowingAvatar
             size="sm"
@@ -125,10 +125,12 @@ export function AudioPlayer() {
             fallback="SF"
             glowColor="from-purple-600 to-blue-600"
           />
-          <h3 className="text-sm text-gray-300 mt-1">Ray Dev</h3>
+          <h3 className="hidden sm:inline text-sm text-gray-300 mt-1 text-nowrap text-ellipsis">
+            Ray Dev
+          </h3>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center sm:space-x-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>

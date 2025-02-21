@@ -24,7 +24,7 @@ const navigationItems = [
 export function NavigationSidebar() {
   return (
     <GlassCard
-      className="h-full border-r rounded-none"
+      className="h-full border-r rounded-none hidden lg:block"
       gradient="from-white/[0.02] to-transparent"
     >
       <div className="flex gap-2 items-center h-[3.2em] px-7">

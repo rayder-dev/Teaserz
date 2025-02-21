@@ -33,13 +33,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
-        <div className="grid grid-cols-[64px_240px_1fr_300px] h-[calc(100vh-48px)]">
+        <div className="grid h-[calc(100vh-48px)] grid-cols-[64px_1fr] md:grid-cols-[64px_1fr] lg:grid-cols-[64px_240px_1fr] xl:grid-cols-[64px_240px_1fr_300px]">
           <LeftToolbar />
           <NavigationSidebar />
           <div className="flex flex-1 flex-col h-screen overflow-hidden">
             <AppHeader />
             <div className="flex-1 overflow-x-hidden overflow-y-auto">
-              <main className="p-9 space-y-8 pb-12">{children}</main>
+              <main className="p-4 sm:p-6 md:p-8 lg:p-9 space-y-6 md:space-y-8 pb-16">
+                {children}
+              </main>
             </div>
           </div>
           <RightSidebar />
