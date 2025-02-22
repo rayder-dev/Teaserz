@@ -42,11 +42,11 @@ export function AudioPlayer() {
   const toggleMute = () => {
     if (isMuted) {
       setIsMuted(false);
-      setVolume(prevVolume);
+      setVolume(prevVolume > 0 ? prevVolume : 75); // Restore volume or set to 75
     } else {
-      setIsMuted(true);
-      setPrevVolume(volume);
+      setPrevVolume(volume || 75); // Store previous volume, default to 75 if 0
       setVolume(0);
+      setIsMuted(true);
     }
   };
 
