@@ -30,12 +30,12 @@ export function NavigationSidebar() {
       <div className="flex gap-2 items-center h-[3.2em] px-7">
         <Image
           src="/logo.png"
-          height={35}
-          width={35}
+          height={30}
+          width={30}
           alt="Logo"
           className="w-auto"
         />
-        <h1 className="text-white font-bold text-xl">Teaserz</h1>
+        <h1 className="text-white font-semibold text-xl">Teaserz</h1>
       </div>
       <div className="p-4">
         <nav className="space-y-3">
