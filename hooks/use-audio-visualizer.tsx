@@ -41,9 +41,9 @@ export function useAudioVisualizer(
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barWidth = 3;
-    const barGap = 3;
+    const barGap = 4;
     const maxHeight = canvas.height * 1;
-    const time = Date.now() * 0.002;
+    const time = Date.now() * 0.001;
 
     ctx.shadowColor = "#a855f7"; // purple glow
     ctx.shadowBlur = 20;
@@ -54,8 +54,8 @@ export function useAudioVisualizer(
 
       // Smooth waveform calculation
       const height =
-        (Math.sin(i * 0.08 + time) * 0.6 +
-          Math.sin(i * 0.03 + time * 1.5) * 0.3 +
+        (Math.sin(i * 0.9 + time) * 0.6 +
+          Math.sin(i * 0.03 + time * 1.5) * 0.5 +
           Math.sin(i * 0.02 + time * 0.7) * 0.1) *
         maxHeight *
         amplitude;
@@ -64,7 +64,16 @@ export function useAudioVisualizer(
 
       ctx.fillStyle = gradientRef.current;
       ctx.beginPath();
-      ctx.roundRect(x, y, barWidth, Math.abs(height), 4); // Rounded bars
+      // Draw an ellipse instead of a rounded rectangle
+      ctx.ellipse(
+        x + barWidth / 2, // Center x
+        y + Math.abs(height) / 2, // Center y
+        barWidth / 2, // Radius x
+        Math.abs(height) / 2, // Radius y
+        0, // Rotation
+        0, // Start angle
+        2 * Math.PI // End angle
+      );
       ctx.fill();
     }
 
