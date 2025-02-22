@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Volume2, Volume1, Volume, VolumeX, Settings } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { useAudioVisualizer } from "@/hooks/use-audio-visualizer";
@@ -50,16 +50,19 @@ export function AudioPlayer() {
     }
   };
 
-  const updateVolume = (clientX: number) => {
-    if (!canvasRef.current) return;
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const newVolume = Math.round((x / rect.width) * 100);
-    if (newVolume !== volume) {
-      setVolume(Math.max(0, Math.min(100, newVolume)));
-      setIsMuted(false);
-    }
-  };
+  const updateVolume = useCallback(
+    (clientX: number) => {
+      if (!canvasRef.current) return;
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const newVolume = Math.round((x / rect.width) * 100);
+      if (newVolume !== volume) {
+        setVolume(Math.max(0, Math.min(100, newVolume)));
+        setIsMuted(false);
+      }
+    },
+    [volume]
+  );
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     isDragging.current = true;
@@ -84,7 +87,7 @@ export function AudioPlayer() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  }, [updateVolume]);
 
   return (
     <GlassCard

@@ -31,9 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="grid h-[calc(100vh-48px)] grid-cols-[64px_1fr] md:grid-cols-[64px_1fr] lg:grid-cols-[64px_240px_1fr] xl:grid-cols-[64px_240px_1fr_300px]">
+        <div className="grid grid-cols-[64px_1fr] md:grid-cols-[64px_1fr] lg:grid-cols-[64px_240px_1fr] xl:grid-cols-[64px_240px_1fr_300px]">
           <LeftToolbar />
           <NavigationSidebar />
           <div className="flex flex-1 flex-col h-screen overflow-hidden">
